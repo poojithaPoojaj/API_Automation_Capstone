@@ -3,11 +3,12 @@ package ultralesson.capstone.apiautomation.users;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import ultralesson.capstone.apiautomation.create.CreateUserRequestBody;
 
 import static io.restassured.RestAssured.given;
 
 public class UserClient {
-    public Response createUser(String body) {
+    public Response createUser(CreateUserRequestBody body) {
         return given()
                     .accept(ContentType.JSON)
                     .contentType(ContentType.JSON)
