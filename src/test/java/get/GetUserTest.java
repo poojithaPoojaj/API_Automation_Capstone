@@ -1,10 +1,18 @@
 package get;
 
+import io.restassured.response.Response;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+import ultralesson.capstone.apiautomation.users.UserClient;
 
 import static io.restassured.RestAssured.given;
 
 public class GetUserTest {
+    private UserClient userClient;
+    @BeforeClass
+    public void beforeClass(){
+        userClient=new UserClient();
+    }
 
     @Test
     public void shouldGetUserById(){
@@ -18,4 +26,13 @@ public class GetUserTest {
                 .log().body();
 
     }
+    @Test
+    public void shouldGetAllUsers(){
+       userClient. getAllUsers()
+                .then()
+                .statusCode(200)
+                .log().body();
+    }
+
+
 }

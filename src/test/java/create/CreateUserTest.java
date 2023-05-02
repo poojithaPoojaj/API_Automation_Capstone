@@ -1,16 +1,20 @@
 package create;
 
-import io.restassured.http.ContentType;
-import io.restassured.specification.RequestSpecification;
 import org.hamcrest.Matchers;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
-import ultralesson.capstone.apiautomation.UserClient;
+import ultralesson.capstone.apiautomation.users.UserClient;
 
 import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 
 public class CreateUserTest {
+    private UserClient userClient;
+    @BeforeClass
+    public void beforeClass(){
+        userClient=new UserClient();
+    }
     @Test
     public void shouldAbleToCreateUser(){
         String email= UUID.randomUUID()+"@gmail.com";
@@ -22,7 +26,7 @@ public class CreateUserTest {
                 "  \"email\": \"" + email + "\",\n" +
                 "  \"gender\": \"male\"\n" +
                 "}";
-        new UserClient().createUser(body).then().log().body().statusCode(200)
+        userClient.createUser(body).then().log().body().statusCode(200)
                 .body("id",Matchers.notNullValue())
                 .body("email",Matchers.equalTo(email));
     }
