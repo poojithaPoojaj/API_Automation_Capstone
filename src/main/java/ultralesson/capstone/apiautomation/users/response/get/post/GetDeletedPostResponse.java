@@ -1,22 +1,16 @@
 package ultralesson.capstone.apiautomation.users.response.get.post;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.testng.Assert;
+@Getter
+public class GetDeletedPostResponse {
+    @Setter
 
-public class GetDeletePostResponse {
     private int statusCode;
+
     private String id;
 
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
-
-    public String getId() {
-        return id;
-    }
 
     public void assertDeletePostByid(String id) {
         Assert.assertEquals(this.statusCode,200);

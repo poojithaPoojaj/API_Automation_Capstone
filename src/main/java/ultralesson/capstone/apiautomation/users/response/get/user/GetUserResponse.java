@@ -1,50 +1,19 @@
 package ultralesson.capstone.apiautomation.users.response.get.user;
 
+import lombok.Getter;
+import lombok.Setter;
 import ultralesson.capstone.apiautomation.users.create.CreateUserRequestBody;
 
 import static org.testng.Assert.assertEquals;
 
+@Getter
 public class GetUserResponse {
+    @Setter
     private int statusCode;
     public String id;
 
-    public void setStatusCode(int statusCode) {
-        this.statusCode = statusCode;
-    }
 
     public String title;
-
-    public int getStatusCode() {
-        return statusCode;
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getRegisterDate() {
-        return registerDate;
-    }
-
-    public String getUpdatedDate() {
-        return updatedDate;
-    }
 
     public String firstName;
     public String lastName;

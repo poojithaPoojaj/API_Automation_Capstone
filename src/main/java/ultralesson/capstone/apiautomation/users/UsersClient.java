@@ -3,6 +3,7 @@ package ultralesson.capstone.apiautomation.users;
 
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import ultralesson.capstone.apiautomation.users.create.CreatePostRequestBody;
 import ultralesson.capstone.apiautomation.users.create.CreateUserRequestBody;
 import ultralesson.capstone.apiautomation.users.response.create.user.CreateUserResponse;
 
@@ -11,7 +12,7 @@ import static io.restassured.RestAssured.given;
 public class UsersClient {
 
 
-    public  Response create(CreateUserRequestBody body) {
+    public  Response createUser(CreateUserRequestBody body) {
         Response reponse = given()
                 .accept(ContentType.JSON)
                 .contentType(ContentType.JSON)
@@ -34,13 +35,14 @@ public class UsersClient {
         response.then().log().body();
         return response;
     }
-
-    private  Response getAllPosts() {
+    public Response getPost(String id){
         Response response=given()
+                .pathParam("id", id)
                 .header("app-id", "644a5bc4aa25ea9dea306cf4")
                 .when()
-                .get("https://dummyapi.io/data/v1/post");
-        return  response;
+                .get("https://dummyapi.io/data/v1/post/{id}");
+        response.then().log().body();
+        return response;
     }
 
 
@@ -80,5 +82,17 @@ public class UsersClient {
                 .delete("https://dummyapi.io/data/v1/post/{id}");
         response.then().log().body();
         return response;
+    }
+
+    public Response createPost(CreatePostRequestBody body) {
+        Response reponse = given()
+                .accept(ContentType.JSON)
+                .contentType(ContentType.JSON)
+                .header("app-id", "644a5bc4aa25ea9dea306cf4")
+                .body(body)
+                .when()
+                .post("https://dummyapi.io/data/v1/post/create");
+        reponse.then().log().body();
+        return reponse;
     }
 }
